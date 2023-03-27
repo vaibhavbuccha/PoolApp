@@ -25,7 +25,6 @@ const Login = () => {
 
     const onSubmit = (data) => {
         account.createEmailSession(data?.email, data?.password).then((response) => {
-            console.log(response);
             sessionStorage.setItem('sessionId', response['$id']);
             sessionStorage.setItem('sessionDetails', JSON.stringify(response) );
             navigate('/');
