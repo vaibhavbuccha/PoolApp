@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,12 +18,12 @@ import { destroySession } from '../services/session';
 
 const pages = [];
 
-
 const Header = () => {
     const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
+    const [accountName, setAccountName] = React.useState('');
+
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
     };
@@ -39,6 +39,14 @@ const Header = () => {
       setAnchorElUser(null);
     };
 
+    React.useEffect(() => {
+      account.get().then((response) => {
+        setAccountName(response?.name||'')
+      }).catch((err) => {
+        console.log(err)
+      })
+    },[])
+
     const handleLogout = () => {
       account.deleteSession('current').then(() => {
         destroySession();
@@ -48,7 +56,7 @@ const Header = () => {
       })
     }
 
-    const settings = [{label: 'Profile', click: () => console.log('profile') }, {label: 'Logout', click: handleLogout }];
+    const settings = [{label: 'Profile', click: () => navigate('/profile') }, {label: 'Logout', click: handleLogout }];
   
     return (
       <AppBar position="static">
@@ -143,7 +151,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {accountName?.length ? accountName[0]: 'N/A' }
                 </IconButton>
               </Tooltip>
               <Menu
