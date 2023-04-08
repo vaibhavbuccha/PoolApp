@@ -3,6 +3,7 @@ import React from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import {account} from '../appwrite/appwriteConfig';
+import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { sessionDetail } from '../services/session';
 
@@ -25,6 +26,9 @@ const Main = () => {
         {/* <Sidebar /> */}
         {/* Side Bar */}
         {/* Main Area */}
+        <Grid xs={12} m={5}>
+          <Outlet />
+        </Grid> 
       </Grid>
     </Box>
   )
