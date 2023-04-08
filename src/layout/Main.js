@@ -26,9 +26,9 @@ const Main = () => {
         {/* <Sidebar /> */}
         {/* Side Bar */}
         {/* Main Area */}
-        <Box m={5}>
+        <Grid xs={12} m={5}>
           <Outlet />
-        </Box>
+        </Grid> 
       </Grid>
     </Box>
   )

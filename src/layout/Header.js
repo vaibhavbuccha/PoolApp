@@ -44,6 +44,8 @@ const Header = () => {
         setAccountName(response?.name||'')
       }).catch((err) => {
         console.log(err)
+        destroySession();
+        navigate('/login');
       })
     },[])
 
@@ -53,6 +55,8 @@ const Header = () => {
         navigate('/login');
       }).catch((error) => {
         console.log(error)
+        destroySession();
+        navigate('/login');
       })
     }
 
